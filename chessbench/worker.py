@@ -83,7 +83,7 @@ class Worker:
         run=copy.deepcopy(job)
         kind=run.get('kind')
         expected={**CONFIG,**CONFIG.get(kind,{})}
-        if kind not in ('smoke','tournament') or run.get('config')!=expected:
+        if kind not in ('smoke','tournament','content') or run.get('config')!=expected:
             run.update(status='stopped',stop_reason='Queued configuration differs from the worker frozen protocol',games=[])
             self.publish(run,True);return
         run['software']={'python':platform.python_version(),'platform':platform.platform(),'chess':importlib.metadata.version('chess'),'stockfish_binary_sha256':hashlib.sha256(Path(self.engine).read_bytes()).hexdigest(),'source_revision':(ROOT/'REVISION').read_text().strip() if (ROOT/'REVISION').exists() else 'uncommitted'}
@@ -96,7 +96,8 @@ class Worker:
         for i in range(run['config']['game_count']):
             if time.monotonic()-started>CONFIG['limits']['run_seconds']:
                 run['stop_reason']='run_time_limit';break
-            opening=CONFIG['openings'][i//2]
+            # Content has four complete pairs plus one explicitly unpaired game.
+            opening=CONFIG['openings'][0 if kind=='content' and i==8 else i//2]
             game={'id':f'{run["id"]}:{i}','run_id':run['id'],'index':i,'pair_index':i//2,'opening_name':opening['name'],'opening_moves':opening['moves'],'jev_color':'white' if i%2==0 else 'black','status':'pending','result':'*'}
             run['games'].append(game)
             reserve=lambda amount:self.store.reserve(run['id'],game['id'],amount,run['config']['spending_ceiling_usd'],CONFIG['limits']['lifetime_ceiling_usd'])

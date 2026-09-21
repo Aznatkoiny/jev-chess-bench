@@ -15,7 +15,7 @@
   const money = (value) => finite(value) ? `$${Number(value).toFixed(4)}` : 'Unavailable';
   const escape = (value) => String(value ?? '').replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character]));
   const titleCase = (value) => String(value || 'unknown').replace(/[_-]/g, ' ').replace(/^./, (character) => character.toUpperCase());
-  const kindName = (kind) => ({ tournament: 'Tournament', smoke: 'Gateway smoke', synthetic: 'Synthetic validation', validation: 'Synthetic validation' }[kind] || titleCase(kind));
+  const kindName = (kind) => ({ tournament: 'Tournament', smoke: 'Gateway smoke', content: 'Content recording · unrated', synthetic: 'Synthetic validation', validation: 'Synthetic validation' }[kind] || titleCase(kind));
   const isSynthetic = (item) => ['synthetic', 'validation', 'deterministic'].includes(item?.kind);
   const shortDate = (value) => { const date = new Date(value); return Number.isNaN(date.getTime()) ? 'Date unavailable' : date.toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }); };
   const text = (id, value) => { $(id).textContent = value; };
@@ -197,7 +197,7 @@
     text('results-context', currentRun ? `${kindName(currentRun.kind)} · ${shortDate(currentRun.created_at)} · ${currentRun.id.slice(0, 8)}` : 'Select a recorded run to view measured outcomes.');
     $('validation-note').hidden = !currentRun?.validation_note;
     text('validation-note', currentRun?.validation_note || '');
-    text('results-type', currentRun ? synthetic ? 'Synthetic • not Jev results' : currentRun.kind === 'smoke' ? 'Integration smoke run' : 'Measured tournament' : 'No results yet');
+    text('results-type', currentRun ? synthetic ? 'Synthetic • not Jev results' : currentRun.kind === 'smoke' ? 'Integration smoke run' : currentRun.kind === 'content' ? 'Content recording • unrated' : 'Measured tournament' : 'No results yet');
     $('results-type').className = `tag ${synthetic ? 'synthetic' : currentRun?.kind || ''}`;
     text('score-label', synthetic ? 'Harness score rate' : 'Jev score rate');
     text('score-value', percent(summary.score_rate));
@@ -206,7 +206,7 @@
     text('completion-detail', finite(summary.completed) ? `${num(summary.completed)} completed · ${num(summary.failed ?? 0)} failed · ${num(summary.censored ?? 0)} censored` : 'No completed games');
     text('elo-value', synthetic ? 'Unrated' : num(summary.elo));
     const interval = summary.uncertainty;
-    text('elo-detail', synthetic ? 'Not measured Jev performance' : finite(summary.elo) ? Number(summary.sample_size) === 0 ? 'Initialized · 0 rated tournament games' : `${num(summary.sample_size)} rated tournament games in this pool` : 'Rating requires measured games');
+    text('elo-detail', synthetic ? 'Not measured Jev performance' : currentRun?.kind === 'content' ? 'Unrated content games; rating retained from earlier tournaments' : finite(summary.elo) ? Number(summary.sample_size) === 0 ? 'Initialized · 0 rated tournament games' : `${num(summary.sample_size)} rated tournament games in this pool` : 'Rating requires measured games');
     text('performance-interval', synthetic ? 'Synthetic runs do not support a Jev performance estimate.' : interval ? `Run performance: 95% paired interval ${interval.low === null ? '−∞' : num(interval.low)} to ${interval.high === null ? '+∞' : num(interval.high)}; ${num(interval.pairs)} complete color pairs. ${Number(interval.pairs) === 0 ? 'Insufficient complete pairs to constrain playing strength.' : 'Conditional on the fixed opening suite.'}` : 'The run’s performance interval will appear when results are available.');
     text('latency-value', latency(summary.median_latency_ms));
     text('latency-detail', synthetic ? 'Synthetic timing only' : 'Successful Jev moves, including retries');

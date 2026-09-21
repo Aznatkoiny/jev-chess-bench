@@ -48,6 +48,6 @@ export async function latest(id) {
   return files.length ? read(files[0].url) : read(`jobs/${id}.json`);
 }
 export function makeJob(kind,id=randomUUID()) {
-  if (!['smoke','tournament'].includes(kind)) throw {statusCode:400,publicMessage:'Choose smoke or tournament'};
+  if (!['smoke','tournament','content'].includes(kind)) throw {statusCode:400,publicMessage:'Choose smoke, tournament, or content'};
   return {id,created_at:new Date().toISOString(),status:'queued',kind,config:{...config,...config[kind]},games:[],summary:null,rating_history:[]};
 }

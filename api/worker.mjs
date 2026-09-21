@@ -1,4 +1,5 @@
 import { authorized,send,guard,body,blobs,read,write,validId } from '../server/shared.mjs';
+import { validGameIndex } from '../server/game-bounds.mjs';
 export default guard(async(req,res)=>{
   if(!authorized(req,'WORKER_TOKEN')) return send(res,401,{error:'Unauthorized'});
   if(req.method==='GET') {
@@ -12,13 +13,14 @@ export default guard(async(req,res)=>{
     return send(res,200,{ok:true});
   }
   if(!validId(data.id)) return send(res,400,{error:'Invalid run ID'});
-  if(!await read(`jobs/${data.id}.json`)) return send(res,404,{error:'Unknown queued run'});
+  const job=await read(`jobs/${data.id}.json`);
+  if(!job) return send(res,404,{error:'Unknown queued run'});
   if(data.action==='snapshot' && Number.isSafeInteger(data.sequence) && data.sequence>=0 && data.sequence<1000000 && data.run?.id===data.id) {
     // Immutable versioned names avoid stale overwrite caches. Only the single worker writes snapshots.
     await write(`snapshots/${data.id}/${String(data.sequence).padStart(8,'0')}.json`,data.run);
     return send(res,200,{ok:true});
   }
-  if(data.action==='archive' && Number.isInteger(data.game) && data.game>=0 && data.game<8) {
+  if(data.action==='archive' && validGameIndex(job,data.game)) {
     const path=`artifacts/${data.id}/game-${data.game}.json`;
     const existing=await read(path);
     if(existing) {

@@ -1,5 +1,6 @@
 """Offline worker lifecycle tests. No provider, network, or engine inference."""
 import copy
+import hashlib
 
 import pytest
 
@@ -180,4 +181,68 @@ def test_recorded_plan_is_published_before_starting_match(offline_worker, monkey
     assert captured == [("white", []), ("black", [])]
     assert store.load("synthetic-run")["status"] == "completed"
     assert store.history(pool_hash(CONFIG)) == []  # Smoke never updates Elo.
+    assert store.reserved() == 0
+
+
+def test_content_run_has_nine_games_and_preserves_existing_ratings(offline_worker, monkeypatch):
+    worker, store, hosted = offline_worker
+    captured = []
+    queued = job("content")
+    software = {"stockfish_binary_sha256": hashlib.sha256(
+        worker_module.Path(worker.engine).read_bytes()).hexdigest()}
+    pool = pool_hash(CONFIG, software)
+    store.rate("previous-rated-game", pool, 0)
+    previous_ratings = store.history(pool)
+
+    class FixturePlayer:
+        def __init__(self, *_, **__):
+            self.metadata = {"kind": "synthetic"}
+
+    def fake_match(game, players, limits, checkpoint):
+        snapshots = [call for call in hosted.calls if call["action"] == "snapshot"]
+        assert snapshots[0]["run"]["config"] == queued["config"]
+        captured.append((game["jev_color"], copy.deepcopy(game["opening_moves"])))
+        game.update(status="completed", result="1/2-1/2", moves=[], attempts=[],
+                    termination="synthetic_test_draw", pgn='[Result "1/2-1/2"]\n\n1/2-1/2')
+        checkpoint(game)
+
+    monkeypatch.setattr(worker_module, "JevPlayer", FixturePlayer)
+    monkeypatch.setattr(worker_module, "StockfishPlayer", FixturePlayer)
+    monkeypatch.setattr(worker_module, "play_game", fake_match)
+    worker.execute(queued)
+    saved = store.load(queued["id"])
+    assert saved["status"] == "completed"
+    assert len(saved["games"]) == 9
+    assert captured == [(color, opening["moves"]) for opening in CONFIG["openings"]
+                        for color in ("white", "black")] + [("white", [])]
+    assert saved["games"][8]["pair_index"] == 4
+    assert saved["games"][8]["opening_name"] == "Initial position"
+    assert saved["summary"]["uncertainty"]["pairs"] == 4
+    assert store.history(pool) == previous_ratings == saved["rating_history"]
+    assert saved["summary"]["sample_size"] == 1
+    assert store.db.execute("SELECT COUNT(*) FROM ratings").fetchone()[0] == 1
+    assert len([call for call in hosted.calls if call["action"] == "archive"]) == 9
+    assert (worker.data_dir / "archives" / queued["id"] / "game-8.pgn").exists()
+    assert store.reserved() == 0
+
+
+def test_content_plan_does_not_change_the_existing_benchmark_pool():
+    old_config = copy.deepcopy(CONFIG)
+    old_config.pop("content")
+    assert pool_hash(old_config) == pool_hash(CONFIG)
+    assert CONFIG["tournament"] == {"game_count": 8, "spending_ceiling_usd": 2}
+    assert CONFIG["smoke"] == {"game_count": 2, "spending_ceiling_usd": .6}
+    assert CONFIG["elo"]["rated_kinds"] == ["tournament"]
+
+
+def test_content_cannot_be_changed_to_a_rated_or_larger_plan(offline_worker, monkeypatch):
+    worker, store, _ = offline_worker
+    forbid_inference(monkeypatch)
+    for key, value in [("rated", True), ("game_count", 10), ("spending_ceiling_usd", 5)]:
+        queued = job("content", f"modified-{key}")
+        queued["config"][key] = value
+        worker.execute(queued)
+        saved = store.load(queued["id"])
+        assert saved["status"] == "stopped"
+        assert saved["games"] == []
     assert store.reserved() == 0

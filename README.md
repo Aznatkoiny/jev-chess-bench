@@ -13,6 +13,7 @@ Verified publication: [public app](https://jev-chess-bench.vercel.app) · [priva
 | Rules and harness | Synthetic deterministic players; no paid calls or measured Jev scores |
 | Gateway smoke | 2 games, both colors from the initial position; $0.60 reservation ceiling; unrated |
 | Tournament | 8 games, 4 paired positions with colors swapped; $2.00 reservation ceiling |
+| Content recording | 9 unrated games, 4 color pairs plus an initial-position game with Jev White; $2.50 reservation ceiling |
 | Jev | `typesafe-ai/jev`, `POST https://ai-gateway.vercel.sh/v1/evaluate` |
 | Opponent | Stockfish 16, Ubuntu `16-1build1` arm64, Skill Level 0, depth 4, 1 thread, 16 MiB hash |
 | Turn policy | Jev: 2 attempts maximum, 10 seconds each, 2-second retry delay; engine: 2-second watchdog |
@@ -21,6 +22,20 @@ Verified publication: [public app](https://jev-chess-bench.vercel.app) · [priva
 | Rating | Start at 1000; fixed opponent anchor 1000; K=24; completed tournament chess results only |
 
 The rating is **provisional and relative to this benchmark's opponent pool**. It is not FIDE, Chess.com or Lichess Elo. Skill Level 0 is an engine setting, not a human Elo calibration. The paired performance interval and online Elo history measure different things; small samples cannot establish a precise rating.
+
+## Recording real games
+
+The [recording view](https://jev-chess-bench.vercel.app/record.html) plays every received move in order at 0.75 seconds per ply. It buffers batched updates and switches from LIVE CAPTURE to RECORDED RUN when the worker finishes. The actual Jev decision latency is shown separately. Content games retain their raw results but never change Elo.
+
+With Playwright and Chrome installed, start capture before queuing exactly one new nine-game run:
+
+```sh
+PLAYWRIGHT_MODULE=/absolute/path/to/playwright BROWSER_CHANNEL=chrome \
+BENCH_OPERATOR_TOKEN_FILE=/private/path/to/operator-token \
+BENCH_VIDEO_DIR=output/video/content-nine node scripts/record-content.cjs
+```
+
+The controller reads the operator token only in Node, keeps it out of the browser, and never automatically retries a queue request. It saves the run plan, an actual 1280×720 browser video, a timeline, and verification that every recorded FEN was displayed in order. Set `BENCH_EXISTING_RUN_ID` to capture a previous run without paid inference. Manual viewing uses `/record.html?run=RUN_ID&autoplay=1&pace=750`; Space pauses playback.
 
 ## Local validation
 

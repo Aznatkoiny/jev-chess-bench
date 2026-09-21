@@ -8,6 +8,7 @@
   "limits": {"max_plies": 160, "game_seconds": 1200, "run_seconds": 7200, "stop_after_infrastructure_failures": 2, "reserve_usd_per_attempt": 0.002, "lifetime_ceiling_usd": 5},
   "smoke": {"game_count": 2, "spending_ceiling_usd": 0.6},
   "tournament": {"game_count": 8, "spending_ceiling_usd": 2},
+  "content": {"game_count": 9, "spending_ceiling_usd": 2.5, "purpose": "content recording", "rated": false, "pairing_note": "Four color-balanced opening pairs, then one unpaired initial-position game with Jev as White (5 White, 4 Black)."},
   "openings": [
     {"name": "Initial position", "moves": []},
     {"name": "Open game", "moves": ["e2e4", "e7e5", "g1f3", "b8c6"]},

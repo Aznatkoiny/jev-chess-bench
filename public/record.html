@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Jev vs Stockfish — recording view</title>
+  <link rel="stylesheet" href="/record.css">
+  <script defer src="/record.js"></script>
+</head>
+<body>
+  <main id="stage" class="stage" aria-label="Jev chess match recording">
+    <section class="board-column" aria-label="Chess game">
+      <div class="player"><span class="player-dot black"></span><strong id="black-player">Stockfish 16</strong><span id="black-state"></span><span class="piece-color">Black</span></div>
+      <div id="board" class="board" role="img" aria-label="Initial chess position"></div>
+      <div class="player"><span class="player-dot white"></span><strong id="white-player">Jev</strong><span id="white-state"></span><span class="piece-color">White</span></div>
+    </section>
+    <aside class="match-column">
+      <div class="capture-label"><span id="capture-dot"></span><span id="capture-status">READY TO CAPTURE</span></div>
+      <h1>Jev <span>vs</span><br>Stockfish 16</h1>
+      <p id="opponent-config" class="subtitle">Stockfish engine · Skill 0 · depth 4</p>
+      <div class="game-heading"><span id="game-number">Game 1 / 9</span><span id="side-label">Waiting to play</span></div>
+      <p id="opening" class="opening">Nine new games. Every move on screen.</p>
+      <section class="move-panel" aria-label="Latest displayed move">
+        <div class="move-meta"><span id="move-player">Starting position</span><span id="move-number">Ply 0</span></div>
+        <div class="move-line"><strong id="move-san">—</strong><span id="move-status">Ready</span></div>
+        <div class="decision"><span>Latest Jev decision</span><strong id="jev-latency">—</strong></div>
+        <p class="timing-note">Measured inference time · display pace <span id="pace-label">0.75 s</span>/move</p>
+      </section>
+      <div class="score-heading"><span>Jev’s record</span><span id="completed-label">0 games shown</span></div>
+      <div class="score"><div><strong id="wins">0</strong><span>wins</span></div><div><strong id="draws">0</strong><span>draws</span></div><div><strong id="losses">0</strong><span>losses</span></div></div>
+      <p id="game-message" class="game-message" aria-live="polite">Waiting for a run to begin.</p>
+      <div class="bottom-note"><span>Vercel AI Gateway</span><span>Content run · unrated</span></div>
+      <div class="site-address">jev-chess-bench.vercel.app</div>
+      <div id="controls" class="controls"><button id="start-button" type="button">Play all games</button><a id="app-link" href="/">Open full app</a><span>Space to pause</span></div>
+    </aside>
+    <section id="finale" class="finale" hidden aria-label="Run results">
+      <div class="finale-content"><p class="finale-kicker">Jev vs Stockfish 16</p><h2 id="finale-title">Nine games. All moves recorded.</h2><div id="finale-record" class="finale-record">0 wins · 0 draws · 0 losses</div><p id="finale-detail"></p><p class="finale-disclosure">Real Jev inference through Vercel AI Gateway.<br>Moves paced for viewing. Content run, unrated.</p><p class="finale-address">jev-chess-bench.vercel.app</p></div>
+    </section>
+  </main>
+</body>
+</html>
