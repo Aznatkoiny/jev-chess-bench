@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Watch Jev play chess. Replay measured games, inspect benchmark results, and follow a provisional rating against an open-source opponent." />
+    <meta name="theme-color" content="#191e1b" />
+    <title>Jev Chess Lab</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#match-viewer">Skip to match</a>
+    <div class="app-shell">
+      <header class="site-header">
+        <a class="wordmark" href="/" aria-label="Jev Chess Lab home"><span class="brand-knight" aria-hidden="true">♞</span><span>Jev <strong>Chess Lab</strong></span></a>
+        <div class="header-tools"><span id="connection-status" class="connection-status"><span class="status-dot"></span>Connecting</span><a class="quiet-link" href="#method">How to read the results</a></div>
+      </header>
+
+      <section class="intro" aria-labelledby="page-title">
+        <div><h1 id="page-title">Every move, on the record.</h1><p>A chess observatory for Jev. Watch the games, inspect the decisions, and measure the result.</p></div>
+        <div class="experiment-label"><span class="small-chessboard" aria-hidden="true"></span><span>Chess benchmark<br /><strong>Open games. Measured performance.</strong></span></div>
+      </section>
+
+      <div id="notice" class="notice" role="status" hidden></div>
+
+      <main>
+        <div class="observatory-layout">
+          <aside class="run-sidebar" aria-labelledby="runs-title">
+            <div class="section-heading"><h2 id="runs-title">Run history</h2><button id="refresh-button" class="icon-button" title="Refresh runs" aria-label="Refresh runs">↻</button></div>
+            <p class="section-description">Measured and synthetic runs are labeled separately.</p>
+            <nav id="run-list" class="run-list" aria-label="Benchmark runs"><p class="empty-copy">Loading recorded runs…</p></nav>
+            <div class="sidebar-footnote"><span class="status-dot"></span><p id="worker-status">Checking match worker…</p></div>
+          </aside>
+
+          <section id="match-viewer" class="match-viewer" aria-labelledby="match-title" tabindex="-1">
+            <div class="match-heading"><div><div class="match-kicker"><span id="run-kind" class="tag">No run selected</span><span id="run-status" class="subtle"></span></div><h2 id="match-title">The next move starts here.</h2></div><button id="flip-button" class="icon-button" aria-label="Flip board" title="Flip board">⇅</button></div>
+            <div class="game-select-row"><label for="game-select">Game</label><select id="game-select" disabled><option>No recorded games</option></select><span id="game-result" class="game-result">—</span></div>
+            <div class="player-bar top-player"><span class="player-avatar" id="top-avatar" aria-hidden="true">♚</span><div><strong id="top-player">Opponent</strong><span id="top-detail">Waiting for a match</span></div><span id="top-turn" class="turn-indicator" hidden>To move</span></div>
+            <div id="board" class="chessboard" role="img" aria-label="Chessboard in its initial position. No game selected."></div>
+            <div class="player-bar bottom-player"><span class="player-avatar" id="bottom-avatar" aria-hidden="true">♔</span><div><strong id="bottom-player">Jev</strong><span id="bottom-detail">Inference through Vercel AI Gateway</span></div><span id="bottom-turn" class="turn-indicator" hidden>To move</span></div>
+            <div class="replay-toolbar" role="group" aria-label="Game replay controls"><button id="first-button" class="icon-button" aria-label="Go to starting position" title="Starting position">|‹</button><button id="previous-button" class="icon-button" aria-label="Previous move" title="Previous move (left arrow)">‹</button><button id="play-button" class="play-button" aria-label="Play replay" disabled><span aria-hidden="true">▶</span> Play</button><button id="next-button" class="icon-button" aria-label="Next move" title="Next move (right arrow)">›</button><button id="last-button" class="icon-button" aria-label="Go to latest move" title="Latest move">›|</button><span id="move-position" class="move-position">Move 0 / 0</span></div>
+            <div class="board-caption"><span id="position-description">The board will show a game as soon as one is recorded.</span><label class="live-toggle"><input id="follow-live" type="checkbox" checked /> Follow live</label></div>
+          </section>
+
+          <aside class="match-notebook" aria-labelledby="notebook-title">
+            <div class="section-heading"><h2 id="notebook-title">Match notebook</h2><span id="move-count" class="count-tag">0 plies</span></div>
+            <div id="game-context" class="game-context"><p>Select a run to inspect its games. Jev receives the position and every legal move on each turn.</p></div>
+            <div class="moves-heading"><span>Turn</span><span>White</span><span>Black</span></div>
+            <div id="move-list" class="move-list" role="group" aria-label="Recorded moves"><p class="empty-copy">Moves will appear here.</p></div>
+            <div id="move-detail" class="move-detail">Select a move to inspect its recorded latency.</div>
+            <div class="game-downloads"><a id="pgn-download" class="secondary-button" aria-disabled="true">Download PGN</a><a id="raw-download" class="text-button" aria-disabled="true">Raw game record</a><button id="json-download" class="text-button" disabled>Run JSON</button></div>
+          </aside>
+        </div>
+
+        <section class="results-section" aria-labelledby="results-title">
+          <div class="section-heading results-heading"><div><h2 id="results-title">Performance, with the context.</h2><p id="results-context" class="section-description">Select a recorded run to view measured outcomes.</p></div><span id="results-type" class="tag">No results yet</span></div>
+          <div class="metrics-grid">
+            <article class="metric"><span id="score-label" class="metric-label">Jev score rate</span><strong id="score-value">—</strong><span id="score-detail">(Wins + ½ draws) / completed</span></article>
+            <article class="metric"><span class="metric-label">Wins / draws / losses</span><strong id="record-value" class="record-value">— / — / —</strong><span id="completion-detail">No completed games</span></article>
+            <article class="metric"><span class="metric-label">Provisional pool Elo</span><strong id="elo-value">—</strong><span id="elo-detail">Rating requires measured games</span></article>
+            <article class="metric"><span class="metric-label">Median move latency</span><strong id="latency-value">—</strong><span id="latency-detail">Jev move requests only</span></article>
+          </div>
+          <div class="analysis-grid">
+            <article class="rating-panel"><div class="section-heading"><h3>Rating across games</h3><span id="rating-sample" class="subtle">No rated games</span></div><div id="rating-chart" class="rating-chart"><p class="empty-copy">A rating history will appear after measured games are completed.</p></div><p class="chart-note">Provisional and relative to this opponent pool. This is not FIDE or an online platform rating.</p></article>
+            <article class="quality-panel"><h3>Execution quality</h3><dl class="quality-list"><div><dt>Completed / failed games</dt><dd id="quality-completion">—</dd></div><div><dt>Invalid response rate</dt><dd id="quality-invalid">—</dd></div><div><dt>95th percentile move latency</dt><dd id="quality-p95">—</dd></div><div><dt>Input tokens</dt><dd id="quality-tokens">—</dd></div><div><dt id="quality-cost-label">Estimated API cost</dt><dd id="quality-cost">—</dd></div><div><dt>Reserved spend</dt><dd id="quality-reserved">—</dd></div></dl><p class="chart-note">Infrastructure failures are reported separately from chess losses. Cost is labeled by the evidence available.</p></article>
+          </div>
+          <div class="outcomes-panel"><div class="section-heading"><h3>Game records</h3><span id="games-record-count" class="subtle">No games</span></div><div class="table-scroll"><table class="games-table"><thead><tr><th scope="col">Game</th><th scope="col">Starting position</th><th scope="col">Jev color</th><th scope="col">Result</th><th scope="col">Status</th><th scope="col">Termination</th><th scope="col">Replay</th></tr></thead><tbody id="games-table-body"><tr><td colspan="7" class="empty-table">No games have been recorded.</td></tr></tbody></table></div></div>
+        </section>
+
+        <section id="method" class="method-section" aria-labelledby="method-title"><div><h2 id="method-title">A benchmark you can inspect.</h2><p>Chess rules determine legal moves and outcomes. Jev selects from the complete legal move list, without opponent advice or engine evaluations. Each game retains its move history and reproducible run settings.</p><p>A small sample supports a narrow comparison against the configured opponent. Read the color balance, opening pairs, failure policy, and uncertainty alongside the score.</p></div><div class="method-details"><details open><summary>Selected run configuration</summary><pre id="run-config">No run selected.</pre></details><details><summary>How to read the rating</summary><p>The rating is provisional and relative to this benchmark's opponent pool. The experiment configuration records the initial rating and update rule. The displayed interval reflects available sample uncertainty; it does not establish an absolute playing strength.</p><p>Synthetic harness runs validate the app and are not evidence of Jev's playing performance. Smoke runs check the live integration; tournaments are the planned comparison.</p></details><details id="execution-panel"><summary>Run a protected benchmark</summary><form id="run-form"><p>Public viewing is open. Starting paid inference requires the operator token. The server enforces the run configuration and spending limits.</p><label for="admin-token">Operator token</label><input id="admin-token" name="token" type="password" autocomplete="off" spellcheck="false" required placeholder="Enter operator token" /><label for="run-kind-select">Run type</label><select id="run-kind-select" name="kind"><option value="smoke">Gateway smoke matches</option><option value="tournament">Bounded tournament</option></select><button id="start-run-button" class="primary-button" type="submit">Queue benchmark</button><p class="privacy-note">The token stays in this page's memory and is cleared after submission.</p><p id="run-form-status" role="status"></p></form></details></div></section>
+      </main>
+      <footer><span class="footer-brand">♞ Jev Chess Lab</span><p>Positions, moves, and evidence. No invented results.</p><span id="last-updated">Waiting for data</span></footer>
+    </div>
+  </body>
+</html>

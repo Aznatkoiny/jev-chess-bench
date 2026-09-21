@@ -1,0 +1,20 @@
+{
+  "protocol_version": 1,
+  "game": "chess",
+  "model_id": "typesafe-ai/jev",
+  "gateway_endpoint": "https://ai-gateway.vercel.sh/v1/evaluate",
+  "opponent": {"name": "Stockfish", "version": "16", "package": "Ubuntu 16-1build1 arm64", "kind": "engine with NNUE evaluation", "skill_level": 0, "depth": 4, "threads": 1, "hash_mb": 16, "multi_pv": 1, "uci_limit_strength": false, "clear_hash_each_turn": true, "timeout_seconds": 2, "seed": null},
+  "inference": {"max_attempts": 2, "request_timeout_seconds": 10, "retry_delay_seconds": 2, "temperature": null, "seed": null, "disallow_prompt_training": true, "zero_data_retention": false, "provider_only": ["typesafe-ai"], "candidate_order": "lexicographic UCI", "max_candidates": 255, "input_usd_per_million": 0.042, "output_usd_per_million": 0},
+  "limits": {"max_plies": 160, "game_seconds": 1200, "run_seconds": 7200, "stop_after_infrastructure_failures": 2, "reserve_usd_per_attempt": 0.002, "lifetime_ceiling_usd": 5},
+  "smoke": {"game_count": 2, "spending_ceiling_usd": 0.6},
+  "tournament": {"game_count": 8, "spending_ceiling_usd": 2},
+  "openings": [
+    {"name": "Initial position", "moves": []},
+    {"name": "Open game", "moves": ["e2e4", "e7e5", "g1f3", "b8c6"]},
+    {"name": "Queen pawn", "moves": ["d2d4", "d7d5", "c2c4", "e7e6"]},
+    {"name": "English opening", "moves": ["c2c4", "e7e5", "b1c3", "g8f6"]}
+  ],
+  "draw_policy": "Automatically claim current threefold repetition or 50-move rule; do not claim on an unplayed prospective move. Rules library also enforces stalemate, insufficient material, fivefold repetition and 75-move rule.",
+  "failure_policy": "No substitute moves. Exhausted invalid responses and Jev timeouts are unrated failed games with a separate operational forfeit; HTTP, network, engine, worker, budget and harness failures are unrated infrastructure failures. Ply/time caps are censored, never draws.",
+  "elo": {"initial": 1000, "opponent_anchor": 1000, "k": 24, "rated_kinds": ["tournament"], "label": "Provisional; relative to this benchmark opponent pool only"}
+}
