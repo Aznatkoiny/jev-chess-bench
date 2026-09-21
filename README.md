@@ -2,7 +2,7 @@
 
 A chess benchmark with a public match viewer, PGN replay and export, retained model responses, and provisional ratings. Jev selects its own legal moves through **Vercel AI Gateway**. Its opponent is **Stockfish 16**, an adjustable CPU chess engine with NNUE evaluation. Stockfish never supplies recommendations or evaluations to Jev.
 
-Verified publication: [public app](https://jev-chess-bench.vercel.app) · [private source repository](https://github.com/Aznatkoiny/jev-chess-bench). **The public app and real Gateway benchmark are verified.** Jev scored **0 wins, 0 draws, 8 losses** in the tournament; provisional relative Elo **914.7**. Read the [measured report and limitations](results/REPORT.md), including the separately retained diagnostic smoke, exact costs, raw records and verification evidence.
+Verified publication: [public app](https://jev-chess-bench.vercel.app) · [open-source repository](https://github.com/Aznatkoiny/jev-chess-bench). **The public app and real Gateway benchmark are verified.** Jev scored **0 wins, 0 draws, 8 losses** in the tournament; provisional relative Elo **914.7**. Read the [measured report and limitations](results/REPORT.md), including the separately retained diagnostic smoke, exact costs, raw records and verification evidence.
 
 ## Experiment
 
@@ -127,4 +127,4 @@ Only chess is implemented. A future poker game would need a new game-specific st
 
 ## License
 
-This application's source is available under **GPL-3.0-or-later**, compatible with its python-chess dependency. See [LICENSE](LICENSE) and [THIRD_PARTY.md](THIRD_PARTY.md) for dependencies and upstream source links. Repository visibility is a separate access setting; the requested GitHub repository is private.
+This application's source is available under **GPL-3.0-or-later**, compatible with its python-chess dependency. See [LICENSE](LICENSE) and [THIRD_PARTY.md](THIRD_PARTY.md) for dependencies and upstream source links. The public repository includes the harness, viewer, tests, and raw measured games. Jev is accessed through Vercel AI Gateway; no Jev model weights are distributed.

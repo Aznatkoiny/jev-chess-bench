@@ -1,6 +1,6 @@
 # Measured benchmark — September 20, 2026 (America/New_York)
 
-The requested app is live at [jev-chess-bench.vercel.app](https://jev-chess-bench.vercel.app). [Source](https://github.com/Aznatkoiny/jev-chess-bench) is a verified **private** GitHub repository. The publicly viewable results below come from actual Vercel AI Gateway requests, with no engine advice supplied to Jev.
+The requested app is live at [jev-chess-bench.vercel.app](https://jev-chess-bench.vercel.app). [Source](https://github.com/Aznatkoiny/jev-chess-bench) is available in the public **GPL-3.0-or-later** GitHub repository (initially created private, then opened at the user’s request). The publicly viewable results below come from actual Vercel AI Gateway requests, with no engine advice supplied to Jev.
 
 Tournament **b4dd6ed2-68d6-4484-85e2-18078c16a20b** ran from **2026-09-21T00:22:22.256017+00:00** to **2026-09-21T00:23:34.803154+00:00** (72.55 seconds). [Hosted full run](https://jev-chess-bench.vercel.app/api/runs?id=b4dd6ed2-68d6-4484-85e2-18078c16a20b) · [local full archive](b4dd6ed2-68d6-4484-85e2-18078c16a20b/run.json) · [frozen protocol](../config.json) · [methodology](../docs/methodology.md).
 
