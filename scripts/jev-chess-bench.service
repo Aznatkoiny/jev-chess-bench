@@ -1,0 +1,16 @@
+[Unit]
+Description=Jev chess benchmark durable worker
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/aznatkoiny/Documents/projects/jev-chess-bench
+ExecStart=/home/aznatkoiny/Documents/projects/jev-chess-bench/.venv/bin/python -m chessbench.worker
+Restart=on-failure
+RestartSec=10
+UMask=0077
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

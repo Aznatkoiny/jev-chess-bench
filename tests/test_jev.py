@@ -207,6 +207,47 @@ class JevTests(unittest.TestCase):
         raw["answers"]["move"]["probabilities"] = {"e2e4": 0.5, "d2d4": 0.5}
         self.assertEqual(validate_answer(raw, OBSERVATION["legal_moves"]), "e2e4")
 
+    def test_missing_rounding_uses_documented_typesafe_two_decimals(self):
+        raw = answer()
+        raw["answers"]["move"]["probabilities"] = {"e2e4": .5, "d2d4": .49}
+        result = self.player([raw]).choose(OBSERVATION)
+        attempt = result["attempts"][0]
+        self.assertEqual(len(result["attempts"]), 1)
+        self.assertEqual(attempt["status"], "ok")
+        self.assertEqual(attempt["response_validation"]["probability_decimals"], 2)
+        self.assertEqual(attempt["response_validation"]["rounding_source"], "typesafe_documented_default")
+        self.assertAlmostEqual(attempt["response_validation"]["probability_sum_tolerance"], .010001)
+        self.assertNotIn("rounding", attempt["raw"])
+        self.assertEqual(attempt["raw"]["answers"]["move"]["probabilities"], {"e2e4": .5, "d2d4": .49})
+
+    def test_documented_rounding_accepts_valid_under_and_over_sums(self):
+        moves = ["e2e4", "d2d4", "g1f3"]
+        for values in ([.33, .33, .33], [.34, .34, .33]):
+            raw = answer()
+            raw["answers"]["move"]["probabilities"] = dict(zip(moves, values))
+            self.assertEqual(validate_answer(raw, moves), "e2e4")
+
+    def test_explicit_finer_rounding_overrides_jev_default(self):
+        raw = answer(rounding={"probabilityDecimals": 4})
+        raw["answers"]["move"]["probabilities"] = {"e2e4": .5, "d2d4": .49}
+        with self.assertRaises(GatewayResponseError):
+            validate_answer(raw, OBSERVATION["legal_moves"])
+
+    def test_rounding_does_not_allow_illegal_choice_or_nonmaximal_selection(self):
+        raw = answer("h1h8")
+        raw["answers"]["move"]["probabilities"] = {"e2e4": .5, "d2d4": .49}
+        with self.assertRaises(GatewayResponseError):
+            validate_answer(raw, OBSERVATION["legal_moves"])
+        raw["answers"]["move"]["choice"] = "d2d4"
+        with self.assertRaises(GatewayResponseError):
+            validate_answer(raw, OBSERVATION["legal_moves"])
+
+    def test_rounding_errors_larger_than_half_unit_per_option_still_fail(self):
+        raw = answer()
+        raw["answers"]["move"]["probabilities"] = {"e2e4": .5, "d2d4": .48}
+        with self.assertRaises(GatewayResponseError):
+            validate_answer(raw, OBSERVATION["legal_moves"])
+
 
 if __name__ == "__main__":
     unittest.main()

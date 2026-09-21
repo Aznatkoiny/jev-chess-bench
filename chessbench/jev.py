@@ -21,6 +21,7 @@ ENDPOINT = "https://ai-gateway.vercel.sh/v1/evaluate"
 INPUT_USD_PER_TOKEN = 0.000000042
 RESERVE_USD_PER_ATTEMPT = 0.002
 MAX_CHOICES = 255
+DEFAULT_PROBABILITY_DECIMALS = 2
 # More conservative than the public 32,000-token context at byte-token granularity.
 # A rejected oversized observation never loses legal moves or history silently.
 MAX_REQUEST_BYTES = 28000
@@ -119,7 +120,7 @@ def _probability(value) -> bool:
     return type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1
 
 
-def validate_answer(raw, moves: list[str]) -> str:
+def validate_answer(raw, moves: list[str], *, validation: dict | None = None) -> str:
     if not isinstance(raw, dict) or not isinstance(raw.get("answers"), dict) or set(raw["answers"]) != {"move"}:
         raise GatewayResponseError("Gateway must return exactly one move answer", raw)
     answer = raw["answers"]["move"]
@@ -133,7 +134,16 @@ def validate_answer(raw, moves: list[str]) -> str:
         decimals = rounding.get("probabilityDecimals") if isinstance(rounding, dict) else None
         if decimals is not None and (type(decimals) is not int or not 0 <= decimals <= 15):
             raise GatewayResponseError("Gateway declared invalid rounding precision", raw)
-        tolerance = 1e-6 + (len(moves) * 0.5 * 10 ** -decimals if decimals is not None else 0)
+        # Vercel's official TypeSafe provider declares that Jev rounds to two
+        # decimal places. The public /v1/evaluate route may omit that metadata.
+        # Apply that documented Jev precision without modifying raw probabilities.
+        # See vercel/ai packages/typesafe-ai/src/typesafe-ai-evaluation-model.ts.
+        rounding_source = "gateway_declaration" if decimals is not None else "typesafe_documented_default"
+        decimals = decimals if decimals is not None else DEFAULT_PROBABILITY_DECIMALS
+        tolerance = 1e-6 + len(moves) * 0.5 * 10 ** -decimals
+        if validation is not None:
+            validation.update(probability_decimals=decimals, rounding_source=rounding_source,
+                              probability_sum_tolerance=tolerance)
         if abs(sum(probabilities.values()) - 1) > tolerance:
             raise GatewayResponseError("Gateway probabilities do not sum to one", raw)
         if max(probabilities.values()) > probabilities[answer["choice"]] + 1e-6:
@@ -242,7 +252,9 @@ class JevPlayer:
                 raw = self._invoke_with_deadline(request)
                 attempt["raw"] = _redact(raw, self.key)
                 attempt.update(_accounting(raw))
-                move = validate_answer(raw, request["state"]["legal_moves"])
+                attempt["response_validation"] = {}
+                move = validate_answer(raw, request["state"]["legal_moves"],
+                                       validation=attempt["response_validation"])
                 attempt["status"] = "ok"
                 attempt["latency_ms"] = round((self.clock() - before) * 1000, 3)
                 return {"move": move, "latency_ms": round((self.clock() - started) * 1000, 3), "attempts": attempts}
