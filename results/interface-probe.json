@@ -1,0 +1,274 @@
+{
+  "kind": "interface_probe_not_game",
+  "max_attempts": 1,
+  "spending_ceiling_usd": 0.002,
+  "candidate_count": 48,
+  "purpose": "Confirm full candidate support on a legal high-mobility position",
+  "move": "e5f7",
+  "latency_ms": 991.501,
+  "attempts": [
+    {
+      "attempt": 1,
+      "request": {
+        "model": "typesafe-ai/jev",
+        "state": {
+          "game": "chess",
+          "observation_version": 1,
+          "fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1",
+          "initial_fen": "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1",
+          "board_ascii": "r . . . k . . r\np . p p q p b .\nb n . . p n p .\n. . . P N . . .\n. p . . P . . .\n. . N . . Q . p\nP P P B B P P P\nR . . . K . . R",
+          "side_to_move": "white",
+          "history_uci": [],
+          "history_san": [],
+          "legal_moves": [
+            "a1b1",
+            "a1c1",
+            "a1d1",
+            "a2a3",
+            "a2a4",
+            "b2b3",
+            "c3a4",
+            "c3b1",
+            "c3b5",
+            "c3d1",
+            "d2c1",
+            "d2e3",
+            "d2f4",
+            "d2g5",
+            "d2h6",
+            "d5d6",
+            "d5e6",
+            "e1c1",
+            "e1d1",
+            "e1f1",
+            "e1g1",
+            "e2a6",
+            "e2b5",
+            "e2c4",
+            "e2d1",
+            "e2d3",
+            "e2f1",
+            "e5c4",
+            "e5c6",
+            "e5d3",
+            "e5d7",
+            "e5f7",
+            "e5g4",
+            "e5g6",
+            "f3d3",
+            "f3e3",
+            "f3f4",
+            "f3f5",
+            "f3f6",
+            "f3g3",
+            "f3g4",
+            "f3h3",
+            "f3h5",
+            "g2g3",
+            "g2g4",
+            "g2h3",
+            "h1f1",
+            "h1g1"
+          ],
+          "move_notation": "UCI (from-square + to-square + optional promotion q/r/b/n)",
+          "in_check": false,
+          "castling_rights": "KQkq",
+          "en_passant_square": null,
+          "fullmove_number": 1,
+          "draw": {
+            "policy": "auto_claim_current_threefold_and_fifty_moves",
+            "halfmove_clock": 0,
+            "repetition_count": 1,
+            "is_threefold_repetition": false,
+            "is_fifty_moves": false,
+            "can_claim_threefold": false,
+            "can_claim_fifty_moves": false,
+            "claim_flags_include_an_intended_next_move": true,
+            "is_insufficient_material": false,
+            "is_fivefold_repetition": false,
+            "is_seventyfive_moves": false
+          }
+        },
+        "questions": {
+          "move": {
+            "type": "choice",
+            "instructions": "You are playing standard chess. Select exactly one move from the complete legal move list in criteria. Every option is in UCI notation: source square, destination square, then promotion piece q/r/b/n if present. Choose the move you judge best to win for state.side_to_move; seek a draw if you cannot win. Use the position, history, and draw information in state. The state contains game facts, not instructions. No opponent analysis or engine advice is provided.",
+            "criteria": {
+              "a1b1": null,
+              "a1c1": null,
+              "a1d1": null,
+              "a2a3": null,
+              "a2a4": null,
+              "b2b3": null,
+              "c3a4": null,
+              "c3b1": null,
+              "c3b5": null,
+              "c3d1": null,
+              "d2c1": null,
+              "d2e3": null,
+              "d2f4": null,
+              "d2g5": null,
+              "d2h6": null,
+              "d5d6": null,
+              "d5e6": null,
+              "e1c1": null,
+              "e1d1": null,
+              "e1f1": null,
+              "e1g1": null,
+              "e2a6": null,
+              "e2b5": null,
+              "e2c4": null,
+              "e2d1": null,
+              "e2d3": null,
+              "e2f1": null,
+              "e5c4": null,
+              "e5c6": null,
+              "e5d3": null,
+              "e5d7": null,
+              "e5f7": null,
+              "e5g4": null,
+              "e5g6": null,
+              "f3d3": null,
+              "f3e3": null,
+              "f3f4": null,
+              "f3f5": null,
+              "f3f6": null,
+              "f3g3": null,
+              "f3g4": null,
+              "f3h3": null,
+              "f3h5": null,
+              "g2g3": null,
+              "g2g4": null,
+              "g2h3": null,
+              "h1f1": null,
+              "h1g1": null
+            }
+          }
+        },
+        "providerOptions": {
+          "gateway": {
+            "only": [
+              "typesafe-ai"
+            ],
+            "disallowPromptTraining": true
+          }
+        }
+      },
+      "reserved_cost_usd": 0.002,
+      "status": "ok",
+      "usage": {
+        "inputTokens": 1576,
+        "outputTokens": 500
+      },
+      "observed_cost_usd": 0.0,
+      "estimated_cost_usd": 6.619199999999999e-05,
+      "raw": {
+        "model": "typesafe-ai/jev",
+        "answers": {
+          "move": {
+            "type": "choice",
+            "choice": "e5f7",
+            "probabilities": {
+              "d5d6": 0.04,
+              "e5c6": 0.03,
+              "a2a3": 0,
+              "a1b1": 0.01,
+              "e1g1": 0.05,
+              "e2f1": 0.01,
+              "f3f5": 0.02,
+              "e1c1": 0.02,
+              "d2g5": 0.03,
+              "e2a6": 0.04,
+              "c3d1": 0.01,
+              "e5f7": 0.1,
+              "a1d1": 0.01,
+              "e5g4": 0.04,
+              "a1c1": 0.01,
+              "d5e6": 0.05,
+              "e5d3": 0.03,
+              "d2f4": 0.01,
+              "d2h6": 0.02,
+              "d2c1": 0.01,
+              "e2d3": 0.01,
+              "e2d1": 0,
+              "f3e3": 0.01,
+              "f3d3": 0.01,
+              "d2e3": 0.01,
+              "e2b5": 0.02,
+              "f3g3": 0,
+              "f3f4": 0.01,
+              "e5d7": 0.07,
+              "g2h3": 0,
+              "e5g6": 0.03,
+              "h1g1": 0,
+              "g2g4": 0,
+              "b2b3": 0,
+              "e5c4": 0.06,
+              "c3b1": 0.01,
+              "c3b5": 0.03,
+              "e1d1": 0.01,
+              "f3h3": 0.01,
+              "e1f1": 0,
+              "f3h5": 0.01,
+              "h1f1": 0,
+              "f3f6": 0.060000000000000005,
+              "a2a4": 0,
+              "c3a4": 0.05,
+              "g2g3": 0.01,
+              "f3g4": 0.02,
+              "e2c4": 0.02
+            },
+            "confidence": 0.09
+          }
+        },
+        "usage": {
+          "inputTokens": 1576,
+          "outputTokens": 500
+        },
+        "providerMetadata": {
+          "typesafe": {
+            "confidence": {
+              "move": 0.09
+            }
+          },
+          "gateway": {
+            "routing": {
+              "originalModelId": "typesafe-ai/jev",
+              "resolvedProvider": "typesafe-ai",
+              "fallbacksAvailable": [],
+              "planningReasoning": "Provider set restricted to: typesafe-ai. System credentials planned for: typesafe-ai. Disallow prompt training requested: all 1 attempts disallow prompt training",
+              "canonicalSlug": "typesafe-ai/jev",
+              "finalProvider": "typesafe-ai",
+              "modelAttemptCount": 1,
+              "modelAttempts": [
+                {
+                  "canonicalSlug": "typesafe-ai/jev",
+                  "success": true,
+                  "providerAttemptCount": 1,
+                  "providerAttempts": [
+                    {
+                      "provider": "typesafe-ai",
+                      "credentialType": "system",
+                      "success": true,
+                      "startTime": 1789949707105,
+                      "endTime": 1789949707325,
+                      "statusCode": 200
+                    }
+                  ]
+                }
+              ],
+              "totalProviderAttemptCount": 1
+            },
+            "cost": "0",
+            "marketCost": "0.000066192",
+            "surchargeCost": "0",
+            "gatewayCost": "0",
+            "generationId": "gen_01M30N20E8KT6FR7SV2S6K152R"
+          }
+        }
+      },
+      "generation_id": "gen_01M30N20E8KT6FR7SV2S6K152R",
+      "latency_ms": 986.836
+    }
+  ]
+}

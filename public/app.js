@@ -249,7 +249,14 @@
       if (!Array.isArray(data.runs)) throw new Error('The server returned an unreadable run history.');
       state.runs = data.runs;
       state.worker = data.worker || null;
-      if (!state.runs.some((item) => item.id === state.runId)) { state.runId = state.runs[0]?.id || null; state.gameIndex = 0; }
+      if (!state.runs.some((item) => item.id === state.runId)) {
+        const requested = new URLSearchParams(location.search).get('run');
+        state.runId = state.runs.find(item => item.id === requested)?.id
+          || state.runs.find(item => item.status === 'running')?.id
+          || state.runs.find(item => item.kind === 'tournament')?.id
+          || state.runs[0]?.id || null;
+        state.gameIndex = 0;
+      }
       state.gameIndex = Math.min(state.gameIndex, Math.max(0, (run()?.games?.length || 1) - 1));
       if (state.followLive) state.ply = moves().length;
       text('connection-status', 'Records connected');

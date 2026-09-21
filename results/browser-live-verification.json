@@ -1,0 +1,26 @@
+{
+  "verified": true,
+  "run_id": "2db919a8-608b-43d1-8912-03e00c4f7f13",
+  "frames": [
+    {
+      "at": "2026-09-21T00:28:04.943Z",
+      "position": "Ply 34 / 34",
+      "board": "Position 34 of 34 plies. Last move Qe1#. FEN: r3kbn1/ppp1ppp1/5r2/7p/6b1/8/PPnP1PPP/R1B1q1KR w q - 2 18"
+    },
+    {
+      "at": "2026-09-21T00:28:10.449Z",
+      "position": "Ply 0 / 0",
+      "board": "Chessboard in its initial position. No game selected."
+    },
+    {
+      "at": "2026-09-21T00:28:15.962Z",
+      "position": "Ply 17 / 17",
+      "board": "Position 17 of 17 plies. Last move Nc6+. FEN: rnb2b1r/ppp1kppp/2N2n2/8/5q2/8/PPPP1PPP/R1B1KB1R b KQ - 3 9"
+    }
+  ],
+  "live_board_advanced": true,
+  "operator_token_cleared": true,
+  "browser_storage_empty_of_token": true,
+  "page_errors": [],
+  "evidence_interpretation": "Frame 1 shows the previous tournament and is excluded. Frame 2 is the new run queued with no moves. Frame 3 is the actual new smoke game at ply17, matching its saved FEN. This verifies automatic queued-to-live advancement; the first frame is not evidence for this run."
+}

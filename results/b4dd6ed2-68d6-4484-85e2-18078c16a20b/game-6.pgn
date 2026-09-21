@@ -1,0 +1,17 @@
+[Event "Jev Chess Benchmark"]
+[Site "?"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Jev"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[Termination "checkmate"]
+[RunId "b4dd6ed2-68d6-4484-85e2-18078c16a20b"]
+[GameId "b4dd6ed2-68d6-4484-85e2-18078c16a20b:6"]
+[DrawPolicy "auto_claim_current_threefold_and_fifty_moves"]
+
+1. c4 e5 2. Nc3 Nf6 3. d4 Nc6 4. dxe5 Ng4 5. Nf3 Bc5 6. Nd5 Bxf2+ 7. Kd2 Ncxe5
+8. Nxe5 Be3+ 9. Nxe3 Nxe5 10. Nd5 c6 11. Nc7+ Qxc7 12. Qa4 b5 13. Qxb5 Qd6+ 14.
+Qd5 Nxc4+ 15. Ke1 cxd5 16. e4 Ne5 17. exd5 Ba6 18. Bxa6 Qb6 19. d6 Qa5+ 20. Kf2
+Qxa6 21. Rd1 Rc8 22. Rd5 Qb6+ 23. Rc5 Nd3+ 24. Kg3 Qxd6+ 25. Re5+ Qxe5+ 26. Bf4
+Nxf4 27. Rd1 Rc2 28. Rd5 Nh5+ 29. Kf3 Qe2# 0-1

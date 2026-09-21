@@ -2,7 +2,7 @@
 
 A chess benchmark with a public match viewer, PGN replay and export, retained model responses, and provisional ratings. Jev selects its own legal moves through **Vercel AI Gateway**. Its opponent is **Stockfish 16**, an adjustable CPU chess engine with NNUE evaluation. Stockfish never supplies recommendations or evaluations to Jev.
 
-Publication targets: [public app](https://jev-chess-bench.vercel.app) · [private source repository](https://github.com/Aznatkoiny/jev-chess-bench). **Deployment and measured results are pending verification in this initial documentation.** The final experiment report and archived run records must supply the actual verification evidence; the links alone do not establish deployment success.
+Verified publication: [public app](https://jev-chess-bench.vercel.app) · [private source repository](https://github.com/Aznatkoiny/jev-chess-bench). **The public app and real Gateway benchmark are verified.** Jev scored **0 wins, 0 draws, 8 losses** in the tournament; provisional relative Elo **914.7**. Read the [measured report and limitations](results/REPORT.md), including the separately retained diagnostic smoke, exact costs, raw records and verification evidence.
 
 ## Experiment
 

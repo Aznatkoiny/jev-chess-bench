@@ -1,0 +1,56 @@
+{
+  "baseURL": "https://jev-chess-bench.vercel.app",
+  "runId": "b4dd6ed2-68d6-4484-85e2-18078c16a20b",
+  "kind": "tournament",
+  "status": "completed",
+  "checkedAt": "2026-09-21T00:25:10.367Z",
+  "fixtures": false,
+  "paidExecutionRequested": false,
+  "polls": [
+    {
+      "at": "2026-09-21T00:24:58.079Z",
+      "status": "completed",
+      "totalPlies": 328,
+      "renderedPosition": "Ply 41 / 41"
+    },
+    {
+      "at": "2026-09-21T00:25:02.181Z",
+      "status": "completed",
+      "totalPlies": 328,
+      "renderedPosition": "Ply 41 / 41"
+    },
+    {
+      "at": "2026-09-21T00:25:07.102Z",
+      "status": "completed",
+      "totalPlies": 328,
+      "renderedPosition": "Ply 41 / 41"
+    }
+  ],
+  "liveDataAdvanced": false,
+  "liveBoardAdvanced": false,
+  "replayedGame": {
+    "index": 0,
+    "status": "completed",
+    "plies": 34,
+    "result": "0-1"
+  },
+  "downloads": {
+    "pgnStatus": 200,
+    "rawStatus": 200,
+    "rawAttemptCount": 17
+  },
+  "rating": {
+    "displayed": "915",
+    "sample": "8 rated tournament games in this pool",
+    "performanceInterval": "Run performance: 95% paired interval \u2212\u221e to 1,130; 4 complete color pairs. Conditional on the fixed opening suite.",
+    "plotted": true
+  },
+  "persistedAfterReload": true,
+  "mobileWidth": 390,
+  "horizontalOverflow": false,
+  "errors": [],
+  "screenshots": {
+    "desktop": "/private/tmp/jev-final-browser-qa/desktop.png",
+    "mobile": "/private/tmp/jev-final-browser-qa/mobile.png"
+  }
+}

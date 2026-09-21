@@ -1,1 +1,17 @@
-{"name":"jev-chess-bench","version":"1.0.0","private":true,"type":"module","scripts":{"dev":"node scripts/dev.mjs","test":"node --test tests/*.test.mjs","build":"node scripts/build.mjs"},"dependencies":{"@vercel/blob":"2.7.0"},"engines":{"node":"24.x"}}
+{
+  "name": "jev-chess-bench",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env.local scripts/dev.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "2.7.0"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}
