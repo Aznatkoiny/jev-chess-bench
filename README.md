@@ -25,6 +25,8 @@ The rating is **provisional and relative to this benchmark's opponent pool**. It
 
 ## Recording real games
 
+The recorded [nine-game content run](results/dc99df96-7d9b-4c4d-a39d-f3d8b5fb0c58/REPORT.md) produced eight checkmate losses and one failed game. All 394 played moves were captured; the full video is 5:36 and the labeled highlights are 1:34. This run is separate from the rated tournament.
+
 The [recording view](https://jev-chess-bench.vercel.app/record.html) plays every received move in order at 0.75 seconds per ply. It buffers batched updates and switches from LIVE CAPTURE to RECORDED RUN when the worker finishes. The actual Jev decision latency is shown separately. Content games retain their raw results but never change Elo.
 
 With Playwright and Chrome installed, start capture before queuing exactly one new nine-game run:
@@ -36,6 +38,8 @@ BENCH_VIDEO_DIR=output/video/content-nine node scripts/record-content.cjs
 ```
 
 The controller reads the operator token only in Node, keeps it out of the browser, and never automatically retries a queue request. It saves the run plan, an actual 1280×720 browser video, a timeline, and verification that every recorded FEN was displayed in order. Set `BENCH_EXISTING_RUN_ID` to capture a previous run without paid inference. Manual viewing uses `/record.html?run=RUN_ID&autoplay=1&pace=750`; Space pauses playback.
+
+After capture, `python3 scripts/export-recording.py output/video/content-nine` uses FFmpeg to produce a full H.264 MP4 and a labeled highlights MP4 under 140 seconds. Highlights select the final moves from every game at the captured pace. The exporter retains exact edit ranges and source hashes in `export-metadata.json`. A failed game remains a failure in both videos; it is not replaced by another paid game or counted as a chess loss.
 
 ## Local validation
 

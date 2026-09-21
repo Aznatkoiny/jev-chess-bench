@@ -1,0 +1,273 @@
+{
+  "run_id": "dc99df96-7d9b-4c4d-a39d-f3d8b5fb0c58",
+  "tested_at": "2026-09-21T00:52:51.280Z",
+  "passed": true,
+  "polls": [
+    {
+      "at": "2026-09-21T00:52:53.325Z",
+      "status": "running",
+      "games": 9
+    },
+    {
+      "at": "2026-09-21T00:53:13.433Z",
+      "status": "completed",
+      "games": 9
+    }
+  ],
+  "run_status": "completed",
+  "kind": "content",
+  "summary": {
+    "wins": 0,
+    "draws": 0,
+    "losses": 8,
+    "completed": 8,
+    "failed": 1,
+    "censored": 0,
+    "infrastructure_failures": 0,
+    "operational_forfeits": 1,
+    "score_rate": 0,
+    "invalid_response_rate": 0.015151515151515152,
+    "jev_attempts": 198,
+    "invalid_responses": 3,
+    "median_latency_ms": 325.4,
+    "p95_latency_ms": 561.4,
+    "input_tokens": 296143,
+    "output_tokens": 42180,
+    "usage_observed_attempts": 198,
+    "observed_cost_usd": 0,
+    "cost_observed_attempts": 198,
+    "estimated_cost_usd": 0.012438006,
+    "cost_estimated_attempts": 198,
+    "reserved_cost_usd": 0.396,
+    "elo": 914.7,
+    "sample_size": 8,
+    "uncertainty": {
+      "low": null,
+      "high": 1224,
+      "score_low": 0,
+      "score_high": 0.7841002756996854,
+      "pairs": 3,
+      "method": "95% paired Hoeffding performance interval; null endpoints are unbounded"
+    },
+    "label": "Provisional; relative to the benchmark opponent pool only"
+  },
+  "games": [
+    {
+      "index": 0,
+      "jev_color": "white",
+      "status": "completed",
+      "result": "0-1",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 32,
+      "failures": []
+    },
+    {
+      "index": 1,
+      "jev_color": "black",
+      "status": "completed",
+      "result": "1-0",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 49,
+      "failures": []
+    },
+    {
+      "index": 2,
+      "jev_color": "white",
+      "status": "completed",
+      "result": "0-1",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 30,
+      "failures": []
+    },
+    {
+      "index": 3,
+      "jev_color": "black",
+      "status": "completed",
+      "result": "1-0",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 27,
+      "failures": []
+    },
+    {
+      "index": 4,
+      "jev_color": "white",
+      "status": "completed",
+      "result": "0-1",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 26,
+      "failures": []
+    },
+    {
+      "index": 5,
+      "jev_color": "black",
+      "status": "failed",
+      "result": "*",
+      "termination": "invalid_response",
+      "failure_kind": "invalid_response",
+      "plies": 25,
+      "failures": [
+        {
+          "kind": "invalid_response",
+          "message": "Gateway choice is not a highest-probability option"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "jev_color": "white",
+      "status": "completed",
+      "result": "0-1",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 32,
+      "failures": []
+    },
+    {
+      "index": 7,
+      "jev_color": "black",
+      "status": "completed",
+      "result": "1-0",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 53,
+      "failures": []
+    },
+    {
+      "index": 8,
+      "jev_color": "white",
+      "status": "completed",
+      "result": "0-1",
+      "termination": "checkmate",
+      "failure_kind": null,
+      "plies": 120,
+      "failures": []
+    }
+  ],
+  "configuration": {
+    "model_id": "typesafe-ai/jev",
+    "opponent": {
+      "name": "Stockfish",
+      "version": "16",
+      "package": "Ubuntu 16-1build1 arm64",
+      "kind": "engine with NNUE evaluation",
+      "skill_level": 0,
+      "depth": 4,
+      "threads": 1,
+      "hash_mb": 16,
+      "multi_pv": 1,
+      "uci_limit_strength": false,
+      "clear_hash_each_turn": true,
+      "timeout_seconds": 2,
+      "seed": null
+    },
+    "game_count": 9,
+    "spending_ceiling_usd": 2.5,
+    "inference": {
+      "max_attempts": 2,
+      "request_timeout_seconds": 10,
+      "retry_delay_seconds": 2,
+      "temperature": null,
+      "seed": null,
+      "disallow_prompt_training": true,
+      "zero_data_retention": false,
+      "provider_only": [
+        "typesafe-ai"
+      ],
+      "candidate_order": "lexicographic UCI",
+      "max_candidates": 255,
+      "input_usd_per_million": 0.042,
+      "output_usd_per_million": 0
+    }
+  },
+  "software": {
+    "python": "3.12.3",
+    "platform": "Linux-7.0.0-1019-nvidia-aarch64-with-glibc2.39",
+    "chess": "1.11.2",
+    "stockfish_binary_sha256": "1dfbbeaf1d7e0309dbd96aa6726332ff83944ba87d06aac7d3ba912c89c4b2a8",
+    "source_revision": "a97e45c4657d79eb5ef371c170fa94dd0260de99"
+  },
+  "checks": {
+    "content_unrated_label": true,
+    "nine_game_options": true,
+    "nine_game_rows": true,
+    "ninth_game_board_and_replay": true,
+    "elo_unchanged": true,
+    "retained_rated_sample": 8,
+    "reload_persistence": true,
+    "downloads": [
+      {
+        "endpoint": "pgn",
+        "game_index": 8,
+        "status": 200
+      },
+      {
+        "endpoint": "pgn",
+        "game_index": 9,
+        "status": 400
+      },
+      {
+        "endpoint": "artifact",
+        "game_index": 8,
+        "status": 200
+      },
+      {
+        "endpoint": "artifact",
+        "game_index": 9,
+        "status": 400
+      }
+    ]
+  },
+  "browser_errors": [],
+  "invalid_response_analysis": {
+    "records": [
+      {
+        "game_index": 5,
+        "attempt": 1,
+        "error": "Gateway choice is not a highest-probability option",
+        "chosen_move": "c7c5",
+        "chosen_move_is_legal": true,
+        "chosen_probability": 0.2,
+        "maximum_probability": 0.21000000000000002,
+        "maximum_options": [
+          "f8d8"
+        ],
+        "generation_id": "gen_01M30Q5MDSCYMPPZRAMAC55ZRT"
+      },
+      {
+        "game_index": 5,
+        "attempt": 2,
+        "error": "Gateway choice is not a highest-probability option",
+        "chosen_move": "f8d8",
+        "chosen_move_is_legal": true,
+        "chosen_probability": 0.19999999999999998,
+        "maximum_probability": 0.21,
+        "maximum_options": [
+          "c7c5"
+        ],
+        "generation_id": "gen_01M30Q5PPS12H3RXSR681Q96F7"
+      },
+      {
+        "game_index": 7,
+        "attempt": 1,
+        "error": "Gateway choice is not a highest-probability option",
+        "chosen_move": "f8c5",
+        "chosen_move_is_legal": true,
+        "chosen_probability": 0.08,
+        "maximum_probability": 0.09,
+        "maximum_options": [
+          "f8e7"
+        ],
+        "generation_id": "gen_01M30Q63F33WGZY9YJ2VQHEM1K"
+      }
+    ],
+    "interpretation": "Responses selected listed legal moves but failed the frozen highest-probability consistency requirement. These are not illegal chess moves. The failed game remains an operational forfeit and is excluded from chess losses.",
+    "official_choice_contract": "https://docs.typesafe.ai/primitives/choice",
+    "official_rounding_source": "https://github.com/vercel/ai/blob/main/packages/typesafe-ai/src/typesafe-ai-evaluation-model.ts",
+    "records_changed": false
+  }
+}

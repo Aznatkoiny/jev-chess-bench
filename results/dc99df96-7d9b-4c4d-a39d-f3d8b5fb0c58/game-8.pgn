@@ -1,0 +1,22 @@
+[Event "Jev Chess Benchmark"]
+[Site "?"]
+[Date "????.??.??"]
+[Round "?"]
+[White "Jev"]
+[Black "Stockfish 16"]
+[Result "0-1"]
+[Termination "checkmate"]
+[RunId "dc99df96-7d9b-4c4d-a39d-f3d8b5fb0c58"]
+[GameId "dc99df96-7d9b-4c4d-a39d-f3d8b5fb0c58:8"]
+[DrawPolicy "auto_claim_current_threefold_and_fifty_moves"]
+
+1. e4 e6 2. Nc3 d5 3. Nxd5 exd5 4. exd5 Nf6 5. Nf3 Qe7+ 6. Ne5 Qxe5+ 7. Qe2 Bd6
+8. Qxe5+ Bxe5 9. d6 cxd6 10. Ba6 bxa6 11. O-O a5 12. d4 Bf4 13. d5 Bxc1 14.
+Rfxc1 Ke7 15. Rf1 Nxd5 16. c4 Nd7 17. cxd5 Kf8 18. Rfb1 Ne5 19. Rf1 f6 20. Rfb1
+Ke8 21. Rf1 a4 22. Rfb1 Rb8 23. Rf1 a6 24. Rfb1 a5 25. Rf1 Bb7 26. Rfb1 Rd8 27.
+Rf1 a3 28. bxa3 Bc8 29. Rfb1 g5 30. Rb8 g4 31. Ra8 Rg8 32. Rb8 Kf7 33. Ra8 Rgf8
+34. Rb8 h6 35. Ra8 f5 36. Rb8 a4 37. Ra8 Kf6 38. Rb8 Ng6 39. Ra8 Nh8 40. Rb8 h5
+41. Ra8 Ng6 42. Rb8 Rde8 43. Ra8 h4 44. Rb8 Rd8 45. Ra8 Ne5 46. Rb8 Kg7 47. Ra8
+h3 48. Rb8 Rg8 49. Ra8 f4 50. Rb8 Rde8 51. Ra8 Re7 52. Rb8 Ree8 53. Ra8 hxg2
+54. Rb8 Ref8 55. Ra8 f3 56. Rb8 Kg6 57. Ra8 Rh8 58. Rb8 Nd3 59. Ra8 Nf4 60. Rb8
+Ne2# 0-1

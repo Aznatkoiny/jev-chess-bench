@@ -1,0 +1,174 @@
+{
+  "run_id": "dc99df96-7d9b-4c4d-a39d-f3d8b5fb0c58",
+  "source": "/Users/antonyzaki/Documents/Repo/jev/jev-chess-bench/output/video/content-nine/jev-nine-games-capture.webm",
+  "source_sha256": "47f415761c4cc4a33f62b4efda8d0b1fca0ff3417380081cfa967844e846b8d7",
+  "capture_start": "2026-09-21T00:51:16.157Z",
+  "recording_type": "Actual browser viewport capture; model moves are displayed at the recorded pace",
+  "editing": "Full: opening wait trimmed. Highlights: intact final-move excerpts from every game, with a separate label above the viewport. No acceleration or generated chess positions.",
+  "timeline_offset_seconds": 0,
+  "audio": "Silent AAC stereo; no narration recorded",
+  "frame_rate": 30,
+  "source_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp8",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "pix_fmt": "yuv420p",
+        "r_frame_rate": "25/1"
+      }
+    ],
+    "format": {
+      "duration": "348.000000",
+      "size": "15179673"
+    }
+  },
+  "ranges": {
+    "full": {
+      "start": 9.343,
+      "end": 345.36400000000003,
+      "duration": 336.021
+    },
+    "highlights": [
+      {
+        "game_index": 0,
+        "game_number": 1,
+        "first_ply": 23,
+        "last_ply": 32,
+        "start": 27.293,
+        "end": 36.949,
+        "duration": 9.655999999999999
+      },
+      {
+        "game_index": 1,
+        "game_number": 2,
+        "first_ply": 40,
+        "last_ply": 49,
+        "start": 67.74,
+        "end": 77.402,
+        "duration": 9.662000000000006
+      },
+      {
+        "game_index": 2,
+        "game_number": 3,
+        "first_ply": 21,
+        "last_ply": 30,
+        "start": 93.858,
+        "end": 103.56,
+        "duration": 9.701999999999998
+      },
+      {
+        "game_index": 3,
+        "game_number": 4,
+        "first_ply": 18,
+        "last_ply": 27,
+        "start": 117.561,
+        "end": 127.21,
+        "duration": 9.648999999999987
+      },
+      {
+        "game_index": 4,
+        "game_number": 5,
+        "first_ply": 17,
+        "last_ply": 26,
+        "start": 140.411,
+        "end": 150.071,
+        "duration": 9.659999999999997
+      },
+      {
+        "game_index": 5,
+        "game_number": 6,
+        "first_ply": 16,
+        "last_ply": 25,
+        "start": 162.659,
+        "end": 172.476,
+        "duration": 9.817000000000007
+      },
+      {
+        "game_index": 6,
+        "game_number": 7,
+        "first_ply": 23,
+        "last_ply": 32,
+        "start": 190.271,
+        "end": 199.978,
+        "duration": 9.707000000000022
+      },
+      {
+        "game_index": 7,
+        "game_number": 8,
+        "first_ply": 44,
+        "last_ply": 53,
+        "start": 234.082,
+        "end": 243.649,
+        "duration": 9.567000000000007
+      },
+      {
+        "game_index": 8,
+        "game_number": 9,
+        "first_ply": 111,
+        "last_ply": 120,
+        "start": 328.783,
+        "end": 345.36400000000003,
+        "duration": 16.581000000000017
+      }
+    ],
+    "last_plies_selected": 10
+  },
+  "outputs": {
+    "full": {
+      "path": "/Users/antonyzaki/Documents/Repo/jev/jev-chess-bench/output/video/content-nine/jev-nine-games-full.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "336.021000",
+          "size": "7759088"
+        }
+      }
+    },
+    "highlights": {
+      "path": "/Users/antonyzaki/Documents/Repo/jev/jev-chess-bench/output/video/content-nine/jev-nine-games-tweet-highlights.mp4",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 760,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1"
+          },
+          {
+            "codec_name": "aac",
+            "codec_type": "audio",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "duration": "94.001000",
+          "size": "2397669"
+        }
+      }
+    }
+  }
+}
