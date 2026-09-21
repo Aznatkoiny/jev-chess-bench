@@ -38,9 +38,11 @@ def summary(games, rating_history=None, reserved=0):
     def percentile(p):
         if not latencies:return None
         return round(latencies[min(len(latencies)-1, math.ceil(p*len(latencies))-1)],1)
-    def tokens(name):return sum(a.get('usage',{}).get(name,0) or 0 for a in attempts)
+    def tokens(name):
+        values=[a.get('usage',{}).get(name) for a in attempts if a.get('usage',{}).get(name) is not None]
+        return sum(values) if values else None
     observed=[a.get('observed_cost_usd') for a in attempts if a.get('observed_cost_usd') is not None]
-    estimated=sum(a.get('estimated_cost_usd',0) or 0 for a in attempts)
+    estimates=[a['estimated_cost_usd'] for a in attempts if a.get('estimated_cost_usd') is not None]
     invalid=sum(a.get('status') in ('invalid_response','invalid','malformed') for a in attempts)
     history=rating_history or []
     return {'wins':scores.count(1),'draws':scores.count(.5),'losses':scores.count(0),'completed':len(scores),
@@ -50,7 +52,8 @@ def summary(games, rating_history=None, reserved=0):
             'score_rate':sum(scores)/len(scores) if scores else None,'invalid_response_rate':invalid/len(attempts) if attempts else None,
             'jev_attempts':len(attempts),'invalid_responses':invalid,'median_latency_ms':percentile(.5),'p95_latency_ms':percentile(.95),
             'input_tokens':tokens('inputTokens'),'output_tokens':tokens('outputTokens'),
+            'usage_observed_attempts':sum('inputTokens' in a.get('usage',{}) for a in attempts),
             'observed_cost_usd':sum(observed) if observed else None,'cost_observed_attempts':len(observed),
-            'estimated_cost_usd':estimated,'reserved_cost_usd':round(reserved,6),
+            'estimated_cost_usd':sum(estimates) if estimates else None,'cost_estimated_attempts':len(estimates),'reserved_cost_usd':round(reserved,6),
             'elo':round(history[-1]['rating'],1) if history else 1000,'sample_size':len(history),
             'uncertainty':uncertainty(games),'label':'Provisional; relative to the benchmark opponent pool only'}
